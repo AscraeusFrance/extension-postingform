@@ -1,0 +1,184 @@
+<!-- INCLUDE overall_header.html -->
+
+<form id="postforum" method="post" action="">
+
+	<div class="panel bg2">
+		<div class="inner">
+			<fieldset class="fields1">
+		<!-- Starting Form title -->
+			<h2>{L_POSTING_FORM_TITLE}</h2>
+		<!-- Ending Form title -->
+<!-- IF SHOW_ERRORS_LIST -->
+<dl><dd class="error">
+<ul>{ERRORS_EXPLAIN}<br />
+{ERRORS_LIST}</ul>
+</dd></dl>
+<!-- ENDIF -->
+		<!-- Starting forums list -->
+			<dl>
+				<dt><label for="select_forum_id">{L_FORUM_SELECT_TITLE}{L_COLON}</label></dt>
+				<dd>
+			<!-- IF S_FORUMS_LIST -->
+				<select id="select_forum_id" name="select_forum_id" onchange="this.form.submit()">
+					<option value="-1" disabled <!-- IF not S_FORUM_ID -->selected<!-- ELSE --><!-- ENDIF -->>{L_FORUM_SELECT_TITLE}</option>
+				<!-- BEGIN forums_list -->
+					<!-- IF not forums_list.S_IS_POST -->
+						<optgroup label="{forums_list.FORUM_NAME}">
+					<!-- ELSE -->
+						<option value="{forums_list.FORUM_ID}"{forums_list.FORUM_SELECTED}>{forums_list.FORUM_NAME}
+					<!-- ENDIF -->
+					<!-- IF not forums_list.S_IS_POST -->
+						</optgroup>
+					<!-- ELSE -->
+						</option>
+					<!-- ENDIF -->
+				<!-- END forums_list -->
+				</select>
+			<!-- ELSE -->
+				{L_NO_FORUM}
+			<!-- ENDIF -->
+				</dd>
+			</dl>
+		<!-- Ending forums list -->
+
+		<!-- Starting post_type -->
+			<!-- IF SHOW_POST_TYPE -->
+				<hr />
+				<dl>
+					<dt><label for="select_post_type">{L_POST_TYPE_TITLE}{L_COLON}</label></dt>
+					<dd>
+						<input id="select_post_type" type="radio" name="select_post_type" value="1"<!-- IF not S_TOPICS_LIST or POST_TYPE_OPTION eq 1 -->checked="checked"<!-- ENDIF --> onClick="this.form.submit()" tabindex="20" />{L_POST_TYPE_NEW}
+						<!-- IF S_TOPICS_LIST -->
+						<input id="select_post_type" type="radio" name="select_post_type" value="2"<!-- IF POST_TYPE_OPTION eq 2 -->checked="checked"<!-- ENDIF --> onClick="this.form.submit()" tabindex="30" />{L_POST_TYPE_REPLY}
+						<!-- ENDIF -->
+					</dd>
+				</dl>
+			<!-- ENDIF -->
+		<!-- Ending post_type -->
+		
+		<!-- Starting topics list -->
+			<!-- IF POST_TYPE_OPTION eq 2 -->
+				<hr />
+				<dl>
+					<dt><label for="select_topic_id">{L_TOPIC_SELECT_TITLE}{L_COLON}</label></dt>
+					<dd>
+				<!-- IF S_TOPICS_LIST -->
+					<!-- BEGIN topics_list -->
+						<input id="select_topic_id" type="radio" name="select_topic_id" value="{topics_list.TOPIC_ID}"{topics_list.TOPIC_SELECTED} onClick="this.form.submit()" tabindex="40" />{topics_list.TOPIC_TITLE}<br />
+					<!-- END topics_list -->
+				<!-- ELSE -->
+					{L_NO_TOPIC}
+				<!-- ENDIF -->
+					</dd>
+				</dl>
+			<!-- ENDIF -->
+		<!-- Ending topics list -->
+<!-- IF SHOW_POST_FIELDS -->
+		<!-- Starting topic title -->
+			
+				<hr />
+				<dl>
+					<dt><label for="select_post_title">{L_POST_TITLE}{L_COLON}</label></dt>
+					<dd><input id="select_post_title" type="text" name="select_post_title" value="{POST_TITLE_FIELD}" size="45" maxlength="<!-- IF POST_TYPE_OPTION eq 1 -->120<!-- ELSE -->124<!-- ENDIF -->" tabindex="50" /></dd>
+				</dl>
+			
+		<!-- Ending topic title -->
+
+		<!-- Starting post message -->
+			
+				<dl>
+					<dt><label for="select_message">{L_POST_MESSAGE}{L_COLON}</label><br />{L_POST_MESSAGE_EXPLAIN}</dt>
+					<dd><textarea id="select_message" name="select_message" rows="15" cols="76" tabindex="60">{POST_TEXT_FIELD}</textarea></dd>
+				</dl>
+			
+		<!-- Ending post message -->
+
+		<!-- Starting post date -->
+
+				<hr />
+				<dl>
+					<dt><label for="select_post_time_day">{L_POST_DATE}{L_COLON}</label><br />{L_POST_DATE_EXPLAIN}</dt>
+					<dd><input id="select_post_time_day" type="text" name="select_post_time_day" value="{POST_TEXT_DAY}" size="12" maxlength="10" onchange="this.form.submit()" tabindex="70" /></dd>
+				</dl>
+			
+		<!-- Ending post date -->
+
+		<!-- Starting post time -->
+			
+				<dl>
+					<dt><label for="select_post_time_hour">{L_POST_TIME}{L_COLON}</label><br />{L_POST_TIME_EXPLAIN}</dt>
+					<dd><input id="select_post_time_hour" type="text" name="select_post_time_hour" value="{POST_TEXT_HOUR}" size="12" maxlength="10" onchange="this.form.submit()" tabindex="80" /></dd>
+				</dl>
+			
+		<!-- Ending post time -->
+
+		<!-- Starting users types -->
+			
+				<hr />
+				<dl>
+					<dt><label for="select_user_type">{L_USERS_TYPE_TITLE}{L_COLON}</label></dt>
+					<dd>
+						<input id="select_user_type" type="radio" name="select_user_type" value="1"<!-- IF USERS_TYPE_OPTION eq 1 --> checked="checked"<!-- ENDIF --> onClick="this.form.submit()" />{L_USERS_TYPE_NEW}
+						<input id="select_user_type" type="radio" name="select_user_type" value="2"<!-- IF USERS_TYPE_OPTION eq 2 --> checked="checked"<!-- ENDIF --> onClick="this.form.submit()" />{L_USERS_TYPE_REGISTERED}						
+					</dd>
+				</dl>
+			
+		<!-- Ending users types -->
+
+		<!-- Starting users list -->
+			<!-- IF USERS_TYPE_OPTION eq 2 -->
+				<hr />
+				<dl>
+					<dt><label for="select_user_id">{L_USER_SELECT_TITLE}{L_COLON}</label></dt>
+					<dd>
+				<!-- IF S_USERS_LIST -->
+					<select id="select_user_id" name="select_user_id" onchange="this.form.submit()" /><option value="-1" disabled<!-- IF not SELECTED_USER_ID --> selected<!-- ELSE --><!-- ENDIF -->>{L_USER_SELECT_TITLE}</option>
+					<!-- BEGIN users_list -->
+							<option value="{users_list.USER_ID}"{users_list.USER_SELECTED}>{users_list.USER_NAME}
+					<!-- END users_list -->					
+					</select>
+				<!-- ELSE -->
+					{L_NO_USER_REGISTERED}
+				<!-- ENDIF -->
+					</dd>
+				</dl>
+			<!-- ENDIF -->
+		<!-- Ending users list -->
+
+		<!-- Starting new users -->
+			<!-- IF USERS_TYPE_OPTION eq 1 -->
+				<hr />
+				<dl>
+					<dt><label for="select_user_name">{L_USER_NAME_FIELD}{L_COLON}</label></dt>
+					<dd><input id="select_user_name" type="text" name="select_user_name" value="{USER_NAME_FIELD}" size="45" onchange="this.form.submit()" /></dd>
+				</dl>
+				<dl>
+					<dt><label for="select_user_mail">{L_USER_MAIL_FIELD}{L_COLON}</label></dt>
+					<dd><input id="select_user_mail" type="text" name="select_user_mail" value="{USER_MAIL_FIELD}" size="45" onchange="this.form.submit()" /></dd>
+				</dl>
+				
+				<dl>
+					<dt><label for="select_user_day">{L_USER_DAY}{L_COLON}</label><br />{L_USER_DAY_EXPLAIN}</dt>
+					<dd><input id="select_user_day" type="text" name="select_user_day" value="{USER_DAY_FIELD}" size="12" maxlength="10" onchange="this.form.submit()" tabindex="70" /></dd>
+				</dl>
+			
+				<dl>
+					<dt><label for="select_user_time">{L_USER_TIME}{L_COLON}</label><br />{L_USER_TIME_EXPLAIN}</dt>
+					<dd><input id="select_user_time" type="text" name="select_user_time" value="{USER_TIME_FIELD}" size="12" maxlength="10" onchange="this.form.submit()" tabindex="80" /></dd>
+				</dl>
+			<!-- ENDIF -->
+		<!-- Ending new users -->
+<!-- ENDIF -->		
+			</fieldset>
+			
+		<!-- Starting Submission button -->
+			<fieldset class="submit-buttons">
+				<input type="submit" accesskey="s" tabindex="6" name="post" value="{L_SUBMIT}" />&nbsp;
+			</fieldset>
+		<!-- Ending Submission button -->
+			
+		</div>
+	</div>
+	
+</form>	
+<!-- INCLUDE overall_footer.html -->

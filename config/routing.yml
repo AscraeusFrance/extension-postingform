@@ -1,0 +1,3 @@
+fofa_postingform_controller:
+    pattern: /postingform
+    defaults: { _controller: fofa.postingform.controller:main }

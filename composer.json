@@ -1,0 +1,28 @@
+{
+	"name": "fofa/postingform",
+	"type": "phpbb-extension",
+	"description": "Allow you to post messages into a phpBB forum with a simple form",
+	"homepage": "http://www.ascraeus-france.fr",
+	"version": "0.3.0",
+	"keywords": ["phpbb", "extension", "posting", "form"],
+	"time": "2015-10-19",
+	"license": "GPL-2.0",
+	"authors": [
+		{
+			"name": "Ascraeus France",
+			"email": "contact@ascraeus-france.fr",
+			"homepage": "http://www.ascraeus-france.fr/",
+			"role": "Extension Developer"
+		}
+	],
+	"require": {
+		"php": ">=5.3.3",
+		"composer/installers": "~1.0"
+	},
+	"extra": {
+		"display-name": "Posting Form",
+		"soft-require": {
+			"phpbb/phpbb": ">=3.1.6,<3.2.*@dev"
+		}
+	}
+}
